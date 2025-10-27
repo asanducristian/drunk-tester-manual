@@ -1,0 +1,28 @@
+{
+  "name": "drunk-tester-manual",
+  "version": "1.0.0",
+  "description": "A CLI tool for drunk-tester-manual",
+  "main": "src/index.js",
+  "bin": {
+    "drunk-tester-manual": "./bin/drunk-tester-manual.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "tester",
+    "drunk-tester"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "@playwright/test": "^1.40.0",
+    "commander": "^11.0.0"
+  }
+}
+
