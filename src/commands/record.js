@@ -23,12 +23,12 @@ async function recordCommand(options, command) {
       const dialogContent = document.createElement('div');
       dialogContent.style.cssText = 'background: white; padding: 20px; border-radius: 8px; min-width: 400px; max-width: 600px;';
       dialogContent.innerHTML = `
-        <h3 style="margin: 0 0 15px 0; color: #333;">Enter Test Suite Name</h3>
-        <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;">What would you like to name this test suite?</p>
-        <input type="text" id="suite-name-input" placeholder="e.g., login-flow, checkout-process" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 15px; font-size: 14px;">
+        <h3 style="margin: 0 0 15px 0; color: #333; font-family: Arial, sans-serif; font-weight: bold;">Enter Test Suite Name</h3>
+        <p style="margin: 0 0 10px 0; color: #666; font-size: 14px; font-family: Arial, sans-serif;">What would you like to name this test suite?</p>
+        <input type="text" id="suite-name-input" placeholder="e.g., login-flow, checkout-process" style="width: 100%; padding: 8px; border: 2px solid #ccc; border-radius: 4px; margin-bottom: 15px; font-size: 14px; font-family: Arial, sans-serif; color: #333; background: white;">
         <div style="display: flex; gap: 10px; justify-content: flex-end;">
-          <button id="suite-cancel" style="padding: 8px 16px; border: 1px solid #ccc; background: white; border-radius: 4px; cursor: pointer;">Cancel</button>
-          <button id="suite-ok" style="padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">Start Recording</button>
+          <button id="suite-cancel" style="padding: 8px 16px; border: 2px solid #ccc; background: white; color: #333; border-radius: 4px; cursor: pointer; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold;">Cancel</button>
+          <button id="suite-ok" style="padding: 8px 16px; background: #007acc; color: white; border: 2px solid #007acc; border-radius: 4px; cursor: pointer; font-family: Arial, sans-serif; font-size: 14px; font-weight: bold;">Start Recording</button>
         </div>
       `;
       

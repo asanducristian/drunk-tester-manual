@@ -43,11 +43,12 @@ function generateClickAction(selector) {
     const parts = selector.split(':');
     const tagName = parts[1];
     const text = parts.slice(2).join(':');
+    const escapedText = text.replace(/'/g, "\\'");
     
     if (tagName === 'li') {
-      return `page.getByText('${text}').click()`;
+      return `page.getByText('${escapedText}').click()`;
     } else {
-      return `page.getByText('${text}').click()`;
+      return `page.getByText('${escapedText}').click()`;
     }
   } else {
     return `page.click('${selector}')`;
@@ -81,7 +82,8 @@ function generateFillAction(selector, value) {
   } else if (selector.startsWith('text:')) {
     const parts = selector.split(':');
     const text = parts.slice(2).join(':');
-    return `page.getByText('${text}').fill('${escapedValue}')`;
+    const escapedText = text.replace(/'/g, "\\'");
+    return `page.getByText('${escapedText}').fill('${escapedValue}')`;
   } else {
     return `page.fill('${selector}', '${escapedValue}')`;
   }
@@ -110,10 +112,12 @@ function generateAssertText(selector, expectedText) {
     const parts = selector.split(':');
     if (parts.length === 2) {
       const text = parts[1];
-      return `await expect(page.getByText('${text}').first()).toBeVisible();\n    await expect(page.getByText('${text}').first()).toHaveText('${escapedText}')`;
+      const escapedTextInSelector = text.replace(/'/g, "\\'");
+      return `await expect(page.getByText('${escapedTextInSelector}').first()).toBeVisible();\n    await expect(page.getByText('${escapedTextInSelector}').first()).toHaveText('${escapedText}')`;
     } else {
       const text = parts.slice(2).join(':');
-      return `await expect(page.getByText('${text}').first()).toBeVisible();\n    await expect(page.getByText('${text}').first()).toHaveText('${escapedText}')`;
+      const escapedTextInSelector = text.replace(/'/g, "\\'");
+      return `await expect(page.getByText('${escapedTextInSelector}').first()).toBeVisible();\n    await expect(page.getByText('${escapedTextInSelector}').first()).toHaveText('${escapedText}')`;
     }
   } else {
     return `await expect(page.locator('${selector}')).toHaveText('${escapedText}')`;
@@ -140,7 +144,8 @@ function generateAssertCount(selector, expectedCount) {
   } else if (selector.startsWith('text:')) {
     const parts = selector.split(':');
     const text = parts.slice(2).join(':');
-    return `await expect(page.getByText('${text}')).toHaveCount(${expectedCount})`;
+    const escapedTextInSelector = text.replace(/'/g, "\\'");
+    return `await expect(page.getByText('${escapedTextInSelector}')).toHaveCount(${expectedCount})`;
   } else {
     return `await expect(page.locator('${selector}')).toHaveCount(${expectedCount})`;
   }
@@ -190,7 +195,7 @@ function generateTestFile(name, url, actions) {
   const setupActions = beforeEachFinished ? testGroups[0] : [];
   const actualTestGroups = beforeEachFinished ? testGroups.slice(1) : testGroups;
 
-  let testCode = `const { test, expect } = require('@playwright/test');
+  let testCode = `import { test, expect } from '@playwright/test';
 
 test.describe('${name}', () => {
   test.beforeEach(async ({ page }) => {
@@ -261,7 +266,7 @@ test.describe('${name}', () => {
   testCode += `});
 `;
 
-  return { code: testCode, filename: `${sanitizedName}.spec.js` };
+  return { code: testCode, filename: `${sanitizedName}.spec.mjs` };
 }
 
 function saveTestFile(name, url, actions) {

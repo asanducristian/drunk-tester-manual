@@ -19,17 +19,17 @@ async function runCommand(options, command) {
   let testPath = '';
   if (name) {
     const sanitizedName = name.replace(/[^a-zA-Z0-9-_]/g, '-');
-    const fullPath = path.join(testsDir, `${sanitizedName}.spec.js`);
+    const fullPath = path.join(testsDir, `${sanitizedName}.spec.mjs`);
     
     if (!fs.existsSync(fullPath)) {
-      logger.error(`Test file not found: tests/${sanitizedName}.spec.js`);
+      logger.error(`Test file not found: tests/${sanitizedName}.spec.mjs`);
       process.exit(1);
     }
     
     logger.info(`Running test: ${sanitizedName}`);
-    testPath = `tests/${sanitizedName}.spec.js`;
+    testPath = `tests/${sanitizedName}.spec.mjs`;
   } else {
-    const testFiles = fs.readdirSync(testsDir).filter(f => f.endsWith('.spec.js'));
+    const testFiles = fs.readdirSync(testsDir).filter(f => f.endsWith('.spec.mjs'));
     
     if (testFiles.length === 0) {
       logger.error('No test files found in tests directory.');
