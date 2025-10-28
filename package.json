@@ -4,7 +4,7 @@
   "description": "A CLI tool for drunk-tester-manual",
   "main": "src/index.js",
   "bin": {
-    "drunk-tester-manual": "./bin/drunk-tester-manual.js"
+    "drunk-tester": "./bin/drunk-tester-manual.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

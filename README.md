@@ -13,7 +13,7 @@ npm install -g drunk-tester-manual
 ### Record Tests
 
 ```bash
-drunk-tester-manual record --url "https://example.com"
+drunk-tester record --url "https://example.com"
 ```
 
 This opens a browser and shows a recording overlay. Interact with the page and use the overlay buttons to control recording.
@@ -21,7 +21,7 @@ This opens a browser and shows a recording overlay. Interact with the page and u
 ### Run Tests
 
 ```bash
-drunk-tester-manual run
+drunk-tester run
 ```
 
 Runs all recorded tests. Use `--headless false` to see the browser.
