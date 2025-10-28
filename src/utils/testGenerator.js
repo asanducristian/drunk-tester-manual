@@ -95,28 +95,28 @@ function generateAssertText(selector, expectedText) {
     const rowIndex = parseInt(parts[1]);
     const role = parts[2];
     const name = parts.slice(3).join(':');
-    return `expect(page.locator('tbody tr').nth(${rowIndex - 1}).getByRole('${role}', { name: '${name}' })).toHaveText('${escapedText}')`;
+    return `await expect(page.locator('tbody tr').nth(${rowIndex - 1}).getByRole('${role}', { name: '${name}' })).toHaveText('${escapedText}')`;
   } else if (selector.startsWith('menu:')) {
     const parts = selector.split(':');
     const role = parts[1];
     const name = parts.slice(2).join(':');
-    return `expect(page.getByRole('${role}', { name: '${name}', exact: true })).toHaveText('${escapedText}')`;
+    return `await expect(page.getByRole('${role}', { name: '${name}', exact: true })).toHaveText('${escapedText}')`;
   } else if (selector.startsWith('role:')) {
     const parts = selector.split(':');
     const role = parts[1];
     const name = parts.slice(2).join(':');
-    return `expect(page.getByRole('${role}', { name: '${name}' })).toHaveText('${escapedText}')`;
+    return `await expect(page.getByRole('${role}', { name: '${name}' })).toHaveText('${escapedText}')`;
   } else if (selector.startsWith('text:')) {
     const parts = selector.split(':');
     if (parts.length === 2) {
       const text = parts[1];
-      return `await page.waitForTimeout(1000);\n    expect(page.getByText('${text}').first()).toBeVisible();\n    expect(page.getByText('${text}').first()).toHaveText('${escapedText}')`;
+      return `await expect(page.getByText('${text}').first()).toBeVisible();\n    await expect(page.getByText('${text}').first()).toHaveText('${escapedText}')`;
     } else {
       const text = parts.slice(2).join(':');
-      return `await page.waitForTimeout(1000);\n    expect(page.getByText('${text}').first()).toBeVisible();\n    expect(page.getByText('${text}').first()).toHaveText('${escapedText}')`;
+      return `await expect(page.getByText('${text}').first()).toBeVisible();\n    await expect(page.getByText('${text}').first()).toHaveText('${escapedText}')`;
     }
   } else {
-    return `expect(page.locator('${selector}')).toHaveText('${escapedText}')`;
+    return `await expect(page.locator('${selector}')).toHaveText('${escapedText}')`;
   }
 }
 
@@ -126,29 +126,29 @@ function generateAssertCount(selector, expectedCount) {
     const rowIndex = parseInt(parts[1]);
     const role = parts[2];
     const name = parts.slice(3).join(':');
-    return `expect(page.locator('tbody tr').nth(${rowIndex - 1}).getByRole('${role}', { name: '${name}' })).toHaveCount(${expectedCount})`;
+    return `await expect(page.locator('tbody tr').nth(${rowIndex - 1}).getByRole('${role}', { name: '${name}' })).toHaveCount(${expectedCount})`;
   } else if (selector.startsWith('menu:')) {
     const parts = selector.split(':');
     const role = parts[1];
     const name = parts.slice(2).join(':');
-    return `expect(page.getByRole('${role}', { name: '${name}', exact: true })).toHaveCount(${expectedCount})`;
+    return `await expect(page.getByRole('${role}', { name: '${name}', exact: true })).toHaveCount(${expectedCount})`;
   } else if (selector.startsWith('role:')) {
     const parts = selector.split(':');
     const role = parts[1];
     const name = parts.slice(2).join(':');
-    return `expect(page.getByRole('${role}', { name: '${name}' })).toHaveCount(${expectedCount})`;
+    return `await expect(page.getByRole('${role}', { name: '${name}' })).toHaveCount(${expectedCount})`;
   } else if (selector.startsWith('text:')) {
     const parts = selector.split(':');
     const text = parts.slice(2).join(':');
-    return `expect(page.getByText('${text}')).toHaveCount(${expectedCount})`;
+    return `await expect(page.getByText('${text}')).toHaveCount(${expectedCount})`;
   } else {
-    return `expect(page.locator('${selector}')).toHaveCount(${expectedCount})`;
+    return `await expect(page.locator('${selector}')).toHaveCount(${expectedCount})`;
   }
 }
 
 function generateAssertURL(expectedURL) {
   const escapedURL = expectedURL.replace(/'/g, "\\'");
-  return `expect(page).toHaveURL('${escapedURL}')`;
+  return `await expect(page).toHaveURL('${escapedURL}')`;
 }
 
 function generateTestFile(name, url, actions) {

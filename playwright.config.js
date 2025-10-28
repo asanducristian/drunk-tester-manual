@@ -6,9 +6,12 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'list',
+  reporter: [['html', { open: 'never' }]],
   use: {
-    trace: 'on-first-retry',
+    headless: true,          // ensure recording works
+    video: 'on',             // record all tests
+    screenshot: 'only-on-failure',
+    trace: 'on-first-retry'
   },
+  outputDir: 'test-results',
 });
-

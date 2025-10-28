@@ -35,6 +35,10 @@ Runs all recorded tests. Use `--headless false` to see the browser.
 - **New Test Suite**: Save current suite and start fresh
 - **Finish & Save**: Stop recording and save
 
+## Videos on Failures
+
+Playwright is configured to record videos and automatically keep them only for failed tests. Videos are saved in the `playwright-report/data/` directory with unique names for each failed test.
+
 ## Generated Tests
 
 Tests are saved in `tests/` directory as Playwright test files. Each recording session creates one test suite with multiple tests.

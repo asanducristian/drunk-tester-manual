@@ -7,7 +7,7 @@ async function runCommand(options, command) {
   const verbose = command.parent.opts().verbose;
   logger.setVerbose(verbose);
   
-  const { name, headless } = options;
+  const { name, headless, reporter } = options;
   const isHeadless = headless === 'false' ? false : headless !== false;
   
   const testsDir = path.join(process.cwd(), 'tests');
@@ -45,14 +45,13 @@ async function runCommand(options, command) {
   logger.info('');
   
   const args = ['playwright', 'test', testPath];
+  if (reporter) {
+    args.push(`--reporter=${reporter}`);
+  }
   
   if (!isHeadless) {
     args.push('--headed');
     logger.verbose('Running in headed mode (visible browser)');
-  }
-  
-  if (verbose) {
-    args.push('--reporter=list');
   }
   
   logger.verbose(`Executing: npx ${args.join(' ')}`);
