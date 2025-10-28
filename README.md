@@ -6,6 +6,7 @@ A CLI tool for recording and replaying browser interactions using Playwright.
 
 ```bash
 npm install -g drunk-tester
+npm install --save-dev @playwright/test playwright
 ```
 
 ## Usage
