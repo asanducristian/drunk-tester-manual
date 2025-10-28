@@ -1,6 +1,6 @@
 {
   "name": "drunk-tester",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A CLI tool for drunk-tester-manual",
   "main": "src/index.js",
   "bin": {
