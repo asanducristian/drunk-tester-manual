@@ -16,6 +16,10 @@ function error(message) {
   console.error(message);
 }
 
+function warn(message) {
+  console.warn(message);
+}
+
 function debug(message) {
   if (isVerbose) {
     console.log(message);
@@ -33,6 +37,7 @@ module.exports = {
   info,
   success,
   error,
+  warn,
   debug,
   verbose
 };

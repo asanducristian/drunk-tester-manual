@@ -7,6 +7,17 @@ async function runCommand(options, command) {
   const verbose = command.parent.opts().verbose;
   logger.setVerbose(verbose);
   
+  // Check for playwright.config.js
+  const configPath = path.join(process.cwd(), 'playwright.config.js');
+  if (!fs.existsSync(configPath)) {
+    logger.warn('⚠️  playwright.config.js not found!');
+    logger.warn('');
+    logger.warn('    Run: drunk-tester init');
+    logger.warn('    This will create a proper config file for better test execution');
+    logger.warn('    Playwright will use default settings if you continue');
+    logger.warn('');
+  }
+  
   const { name, headless, reporter } = options;
   const isHeadless = headless === 'false' ? false : headless !== false;
   

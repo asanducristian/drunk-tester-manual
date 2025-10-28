@@ -4,6 +4,7 @@ const { Command } = require('commander');
 const { recordCommand } = require('./commands/record');
 const { runCommand } = require('./commands/run');
 const { showReportCommand } = require('./commands/show-report');
+const { initCommand } = require('./commands/init');
 const packageJson = require('../package.json');
 
 function runCLI() {
@@ -33,7 +34,12 @@ function runCLI() {
     .command('show-report')
     .description('Open the HTML test report in browser')
     .action(showReportCommand);
-  
+
+  program
+    .command('init')
+    .description('Initialize playwright.config.js file')
+    .action(initCommand);
+
   program.parse(process.argv);
   
   if (!process.argv.slice(2).length) {

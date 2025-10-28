@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const logger = require('../utils/logger');
 const { launchBrowser } = require('../utils/browser');
 const { Recorder } = require('../utils/recorder');
@@ -6,6 +8,17 @@ const { saveTestFile } = require('../utils/testGenerator');
 async function recordCommand(options, command) {
   const verbose = command.parent.opts().verbose;
   logger.setVerbose(verbose);
+  
+  // Check for playwright.config.js
+  const configPath = path.join(process.cwd(), 'playwright.config.js');
+  if (!fs.existsSync(configPath)) {
+    logger.warn('⚠️  playwright.config.js not found!');
+    logger.warn('');
+    logger.warn('    Run: drunk-tester init');
+    logger.warn('    This will create a proper config file for better test recording');
+    logger.warn('    Playwright will use default settings if you continue');
+    logger.warn('');
+  }
   
   const { url } = options;
   
