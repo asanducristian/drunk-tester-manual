@@ -195,7 +195,7 @@ function generateTestFile(name, url, actions) {
   const setupActions = beforeEachFinished ? testGroups[0] : [];
   const actualTestGroups = beforeEachFinished ? testGroups.slice(1) : testGroups;
 
-  let testCode = `import { test, expect } from '@playwright/test';
+  let testCode = `const { test, expect } = require('@playwright/test');
 
 test.describe('${name}', () => {
   test.beforeEach(async ({ page }) => {
@@ -266,7 +266,7 @@ test.describe('${name}', () => {
   testCode += `});
 `;
 
-  return { code: testCode, filename: `${sanitizedName}.spec.mjs` };
+  return { code: testCode, filename: `${sanitizedName}.spec.cjs` };
 }
 
 function saveTestFile(name, url, actions) {

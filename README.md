@@ -5,7 +5,7 @@ A CLI tool for recording and replaying browser interactions using Playwright.
 ## Installation
 
 ```bash
-npm install -g drunk-tester-manual
+npm install -g drunk-tester
 ```
 
 ## Usage

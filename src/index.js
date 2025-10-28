@@ -4,6 +4,7 @@ const { Command } = require('commander');
 const { recordCommand } = require('./commands/record');
 const { runCommand } = require('./commands/run');
 const { showReportCommand } = require('./commands/show-report');
+const packageJson = require('../package.json');
 
 function runCLI() {
   const program = new Command();
@@ -11,7 +12,7 @@ function runCLI() {
   program
     .name('drunk-tester-manual')
     .description('A CLI tool for drunk-tester-manual')
-    .version('1.0.0')
+    .version(packageJson.version)
     .option('-v, --verbose', 'Enable verbose logging');
   
   program
